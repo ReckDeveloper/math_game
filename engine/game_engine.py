@@ -159,20 +159,38 @@ class GameEngine:
                 text_surface = self.font.render(line, True, (255, 255, 255))
                 self.screen.blit(text_surface, (40, y))
                 y += 36
-            # Draw player
-            pygame.draw.ellipse(self.screen, (255, 224, 189), (self.player_pos[0], self.player_pos[1], 60, 120))
-            pygame.draw.ellipse(self.screen, (139, 69, 19), (self.player_pos[0]-10, self.player_pos[1]-20, 80, 40))
-            pygame.draw.ellipse(self.screen, (0, 255, 0), (self.player_pos[0]+20, self.player_pos[1]+10, 40, 20))
-            pygame.draw.rect(self.screen, (128, 0, 128), (self.player_pos[0]+10, self.player_pos[1]+80, 40, 60))
+            # Draw player (no hair, with legs and arms)
+            leg_color = (128, 0, 128)  # Same as dress
+            arm_color = (255, 224, 189)  # Skin color
+            pygame.draw.ellipse(self.screen, (255, 224, 189), (self.player_pos[0], self.player_pos[1], 60, 120))  # face/skin
+            # Arms
+            pygame.draw.rect(self.screen, arm_color, (self.player_pos[0], self.player_pos[1]+80, 10, 40))  # Left arm
+            pygame.draw.rect(self.screen, arm_color, (self.player_pos[0]+50, self.player_pos[1]+80, 10, 40))  # Right arm
+            # Legs
+            pygame.draw.rect(self.screen, leg_color, (self.player_pos[0]+15, self.player_pos[1]+140, 10, 30))  # Left leg
+            pygame.draw.rect(self.screen, leg_color, (self.player_pos[0]+35, self.player_pos[1]+140, 10, 30))  # Right leg
+            # Dress
+            pygame.draw.rect(self.screen, (128, 0, 128), (self.player_pos[0]+10, self.player_pos[1]+80, 40, 60))  # Cosplay dress (purple)
+            # Eyes
             pygame.draw.circle(self.screen, (0, 0, 0), (self.player_pos[0]+20, self.player_pos[1]+40), 5)
             pygame.draw.circle(self.screen, (0, 0, 0), (self.player_pos[0]+40, self.player_pos[1]+40), 5)
-            # Draw sad mouth if needed
+            # Sad mouth if needed
             if self.player_sad:
                 pygame.draw.arc(self.screen, (0, 0, 0), (self.player_pos[0]+20, self.player_pos[1]+70, 20, 10), 3.14, 0, 2)
-            # Draw enemy
+            # Draw enemy (with arms and legs)
+            enemy_leg_color = (21, 96, 189)  # Jeans
+            enemy_arm_color = (255, 224, 189)  # Skin
             pygame.draw.ellipse(self.screen, (255, 224, 189), (self.enemy_pos[0], self.enemy_pos[1], 60, 60))
+            # Arms
+            pygame.draw.rect(self.screen, enemy_arm_color, (self.enemy_pos[0]-10, self.enemy_pos[1]+60, 15, 35))  # Left arm
+            pygame.draw.rect(self.screen, enemy_arm_color, (self.enemy_pos[0]+55, self.enemy_pos[1]+60, 15, 35))  # Right arm
+            # Body
             pygame.draw.rect(self.screen, (0, 120, 255), (self.enemy_pos[0]+15, self.enemy_pos[1]+60, 30, 50))
-            pygame.draw.rect(self.screen, (21, 96, 189), (self.enemy_pos[0]+15, self.enemy_pos[1]+110, 30, 40))
+            # Legs
+            pygame.draw.rect(self.screen, enemy_leg_color, (self.enemy_pos[0]+18, self.enemy_pos[1]+110, 8, 30))  # Left leg
+            pygame.draw.rect(self.screen, enemy_leg_color, (self.enemy_pos[0]+34, self.enemy_pos[1]+110, 8, 30))  # Right leg
+            pygame.draw.rect(self.screen, (21, 96, 189), (self.enemy_pos[0]+15, self.enemy_pos[1]+110, 30, 40))  # Jeans
+            # Eyes
             pygame.draw.circle(self.screen, (0, 0, 0), (self.enemy_pos[0]+20, self.enemy_pos[1]+30), 5)
             pygame.draw.circle(self.screen, (0, 0, 0), (self.enemy_pos[0]+40, self.enemy_pos[1]+30), 5)
             # Draw smile if needed
@@ -193,19 +211,37 @@ class GameEngine:
                 for i in range(4):
                     pygame.draw.rect(self.screen, (160, 82, 45), (140 + i*120, 320, 80, 40))
                 pygame.draw.rect(self.screen, (120, 60, 20), (350, 250, 100, 40))
-                # Draw player
+                # Draw player (no hair, with legs and arms)
+                leg_color = (128, 0, 128)
+                arm_color = (255, 224, 189)
                 pygame.draw.ellipse(self.screen, (255, 224, 189), (self.player_pos[0], self.player_pos[1], 60, 120))
-                pygame.draw.ellipse(self.screen, (139, 69, 19), (self.player_pos[0]-10, self.player_pos[1]-20, 80, 40))
-                pygame.draw.ellipse(self.screen, (0, 255, 0), (self.player_pos[0]+20, self.player_pos[1]+10, 40, 20))
+                # Arms
+                pygame.draw.rect(self.screen, arm_color, (self.player_pos[0], self.player_pos[1]+80, 10, 40))
+                pygame.draw.rect(self.screen, arm_color, (self.player_pos[0]+50, self.player_pos[1]+80, 10, 40))
+                # Legs
+                pygame.draw.rect(self.screen, leg_color, (self.player_pos[0]+15, self.player_pos[1]+140, 10, 30))
+                pygame.draw.rect(self.screen, leg_color, (self.player_pos[0]+35, self.player_pos[1]+140, 10, 30))
+                # Dress
                 pygame.draw.rect(self.screen, (128, 0, 128), (self.player_pos[0]+10, self.player_pos[1]+80, 40, 60))
+                # Eyes
                 pygame.draw.circle(self.screen, (0, 0, 0), (self.player_pos[0]+20, self.player_pos[1]+40), 5)
                 pygame.draw.circle(self.screen, (0, 0, 0), (self.player_pos[0]+40, self.player_pos[1]+40), 5)
                 if self.player_sad:
                     pygame.draw.arc(self.screen, (0, 0, 0), (self.player_pos[0]+20, self.player_pos[1]+70, 20, 10), 3.14, 0, 2)
-                # Draw enemy
+                # Draw enemy (with arms and legs)
+                enemy_leg_color = (21, 96, 189)
+                enemy_arm_color = (255, 224, 189)
                 pygame.draw.ellipse(self.screen, (255, 224, 189), (self.enemy_pos[0], self.enemy_pos[1], 60, 60))
+                # Arms
+                pygame.draw.rect(self.screen, enemy_arm_color, (self.enemy_pos[0]-10, self.enemy_pos[1]+60, 15, 35))
+                pygame.draw.rect(self.screen, enemy_arm_color, (self.enemy_pos[0]+55, self.enemy_pos[1]+60, 15, 35))
+                # Body
                 pygame.draw.rect(self.screen, (0, 120, 255), (self.enemy_pos[0]+15, self.enemy_pos[1]+60, 30, 50))
+                # Legs
+                pygame.draw.rect(self.screen, enemy_leg_color, (self.enemy_pos[0]+18, self.enemy_pos[1]+110, 8, 30))
+                pygame.draw.rect(self.screen, enemy_leg_color, (self.enemy_pos[0]+34, self.enemy_pos[1]+110, 8, 30))
                 pygame.draw.rect(self.screen, (21, 96, 189), (self.enemy_pos[0]+15, self.enemy_pos[1]+110, 30, 40))
+                # Eyes
                 pygame.draw.circle(self.screen, (0, 0, 0), (self.enemy_pos[0]+20, self.enemy_pos[1]+30), 5)
                 pygame.draw.circle(self.screen, (0, 0, 0), (self.enemy_pos[0]+40, self.enemy_pos[1]+30), 5)
                 if self.enemy_smile:
